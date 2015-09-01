@@ -21,25 +21,26 @@ var mainState = {
      bird = game.add.bitmapData(50,50);
      pipe = game.add.bitmapData(50,50);
 
-     // Draw bird
-     bird.ctx.fillStyle = '#fdf317';
-     bird.ctx.strokeStyle = '#000000';
-     bird.ctx.beginPath();
-     bird.ctx.rect(0, 0, 50, 50);
-     bird.ctx.closePath();
-     bird.ctx.fill();
-     bird.ctx.lineWidth = "6";
-     bird.ctx.stroke();
 
-     // Draw pipe
-     pipe.ctx.fillStyle = '#40f225';
-     pipe.ctx.strokeStyle = '#000000';
-     pipe.ctx.beginPath();
-     pipe.ctx.rect(0, 0, 50, 50);
-     pipe.ctx.closePath();
-     pipe.ctx.fill();
-     pipe.ctx.lineWidth = "6";
-     pipe.ctx.stroke();
+      // Draw bird
+      bird.ctx.fillStyle = '#fdf317';
+      bird.ctx.strokeStyle = '#000000';
+      bird.ctx.beginPath();
+      bird.ctx.rect(0, 0, 50, 50);
+      bird.ctx.closePath();
+      bird.ctx.fill();
+      bird.ctx.lineWidth = "6";
+      bird.ctx.stroke();
+
+      // Draw pipe
+      pipe.ctx.fillStyle = '#40f225';
+      pipe.ctx.strokeStyle = '#000000';
+      pipe.ctx.beginPath();
+      pipe.ctx.rect(0, 0, 50, 50);
+      pipe.ctx.closePath();
+      pipe.ctx.fill();
+      pipe.ctx.lineWidth = "6";
+      pipe.ctx.stroke();
 
      // Display the bird on the screen
      this.bird = this.game.add.sprite(100, 245, bird);
@@ -58,10 +59,6 @@ var mainState = {
      var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
      spaceKey.onDown.add(this.jump, this);
 
-
-     // Add a score label on the top left of the screen
-     this.score = 0;
-     this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
 
 
     },
@@ -87,19 +84,15 @@ var mainState = {
 
       // Add the 6 pipes
       for (var i = 0; i < 8; i++)
-          if (i != hole && i != hole + 1)
+          if (i != hole && i != hole + 1) {
               this.addOnePipe(400, i * 60 + 10);
-      this.score += 1;
-      this.labelScore.text = this.score;  
+          }
     },
 
     update: function() {
       // If the bird is out of the world (too high or too low), call the 'restartGame' function
       if (this.bird.inWorld == false)
-          this.restartGame();
-
-      // If the bird overlap any pipes, call 'restartGame'
-      game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
+         this.restartGame();
       },
 
     // Make the bird jump
